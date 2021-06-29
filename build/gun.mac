@@ -1,0 +1,343 @@
+
+/OpNovice/gun/optSource gun
+/gun/particle opticalphoton
+/gun/direction 0.0 0.0 -1.0
+/gun/energy 3.1 eV
+/gun/position  -30.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -30.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -25.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -20.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -15.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -10.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  -5.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  0.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  5.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  10.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  15.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  20.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  25.00 30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 -30.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 -25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 -20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 -15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 -10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 -5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 0.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 5.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 10.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 15.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 20.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 25.00 2.00 cm  
+/run/beamOn 100  
+/gun/position  30.00 30.00 2.00 cm  
+/run/beamOn 100  
