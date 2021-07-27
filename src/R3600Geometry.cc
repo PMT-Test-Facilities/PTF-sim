@@ -216,11 +216,12 @@ void R3600Geometry::Init( ){
   fVols[ "pmtvacuum" ] = new G4PVPlacement( 0, G4ThreeVector(0.,0.,0.), evacuum_log, os.str().c_str(), eglass_log, false, 0 );
 
   // and now the cathode. Place it in the vaccuum
-  os << "R3600ECath1_" << fPMTId;
-  G4Ellipsoid* ecath1 = new G4Ellipsoid( os.str().c_str(), 254.0*CLHEP::mm - glass_thickness, 254.0*CLHEP::mm - glass_thickness, 210.0*CLHEP::mm - glass_thickness, 88.0*CLHEP::mm, 210.0*CLHEP::mm - glass_thickness );
+  os << "R3600ECath1_" << fPMTId;//Erased glass_thickness everywhere
+  G4Ellipsoid* ecath1 = new G4Ellipsoid( os.str().c_str(), 254.0*CLHEP::mm-glass_thickness, 254.0*CLHEP::mm- glass_thickness , 210.0*CLHEP::mm- glass_thickness, 44.0*CLHEP::mm, 210.0*CLHEP::mm-glass_thickness  );
   reset(os);
+  
   os << "R3600ECath2_" << fPMTId; // make cathode 1 um thick (way thicker than reality ~30-60 nm?)
-  G4Ellipsoid* ecath2 = new G4Ellipsoid( os.str().c_str(), 254.0*CLHEP::mm - glass_thickness - cathode_thickness, 254.0*CLHEP::mm - glass_thickness - cathode_thickness, 210.0*CLHEP::mm - glass_thickness - cathode_thickness, 88.0*CLHEP::mm, 210.0*CLHEP::mm - glass_thickness - cathode_thickness );
+  G4Ellipsoid* ecath2 = new G4Ellipsoid( os.str().c_str(), 254.0*CLHEP::mm - glass_thickness - cathode_thickness, 254.0*CLHEP::mm- glass_thickness - cathode_thickness, 210.0*CLHEP::mm- glass_thickness- cathode_thickness, 44.0*CLHEP::mm, 210.0*CLHEP::mm- glass_thickness-cathode_thickness);
   // subtract from center of ellipse to make a void
   reset(os);
   os << "R3600ECath_"<<fPMTId;
