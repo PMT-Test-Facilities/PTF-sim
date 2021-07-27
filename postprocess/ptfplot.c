@@ -9,9 +9,9 @@
 #include "FindCircle.cpp"
 #include "Hough.cpp"
 #include "HoughDisplay.cpp"
-void ptfplot( char * fname = "geant4ptf_100_edge_water.root"){
+void ptfplot( char * fname = "geant4ptf_100_data_format.root"){
 	TTree *t =new TTree("t", "my tree");
-	Double_t x_pos,y_pos,z_pos;
+	Double_t x_pos,y_pos,z_pos; 
 	t->Branch("x_pos", &x_pos,"x_pos/D");
 	t->Branch("y_pos", &y_pos,"y_pos/D");	
 	t->Branch("z_pos", &z_pos,"z_pos/D");  
@@ -23,7 +23,12 @@ void ptfplot( char * fname = "geant4ptf_100_edge_water.root"){
   //Double_t v_max = t->GetMaximum("x");
   
   //cout<<v_max<<endl;
-  
+	double min_bin_x=-300;
+	double min_bin_y=-300;
+	double max_bin_y=300;
+	double max_bin_x=300;
+	int bin_x=63;
+	int bin_y=59;
 //TNtuple * position;
 //TNtuple position("position","position","x:y:z");
 
@@ -34,8 +39,11 @@ void ptfplot( char * fname = "geant4ptf_100_edge_water.root"){
 //position->ReadFile("grid.txt");
 
   TH2D * pos = new TH2D( "pos", "Detection efficiency; x (mm); y (mm)",
-  		  			    21, -300.0, 300.0, 21, -300, 300 );	
-						
+  		  			    bin_x,  min_bin_x, max_bin_x,  bin_y, min_bin_y, max_bin_y );	
+  TH2D * reflection_inc_r = new TH2D( "reflection_inc ", "Beam position/hit position; radial position  (hit) (mm); radial position (incident) (mm)",
+					    		  			    200, 0, 500, 200, 0, 500 );	
+  TH2D * reflection_inc = new TH2D( "reflection_inc ", "Beam position/hit position; z  (hit) (mm); radial position (incident) (mm)",
+											  					    		  			    200, -250, 0, 200, 0, 500 );										
   
   int nevents_pos=t->GetEntries();
   //cout<<nevents_pos<<endl;
@@ -56,20 +64,30 @@ void ptfplot( char * fname = "geant4ptf_100_edge_water.root"){
 			  		  			      31, -300.0, 0, 31, -300.0, 0  );
   
   TH2D * reflection = new TH2D( "reflection", "Number of hits on photocathode; z (mm); time (nsec)",
-			    200, -150, 0.0, 200, -1,10  );
+			    200, -250, 0.0, 200, -1,10  );
+  
+  TH2D * reflection_v = new TH2D( "reflection_v", "Number of hits on photocathode; y (mm); z (mm)",
+			  			    200, -325, 325, 200, -325, 325 );
+  
+  TH2D * reflection_h = new TH2D( "reflection_h", "Number of hits on photocathode; x (mm); z (mm)",
+						  			    200, -325, 325,200, -325, 325);
+										
+  TH2D * reflection_d = new TH2D( "reflection_d", "Number of hits on photocathode; radial distance (mm) ; z (mm)",
+									  						  			    200, 0, 400,200, -150,0 );
+							
 
   TH2D * hscanxy = new TH2D( "hscanxy", "Number of hits on photocathode(not same); x (mm); y (mm)",
-			  		  			     31, -300.0, 0, 31, -300.0, 0  );
+			  		  			  bin_x,  min_bin_x, max_bin_x,  bin_y, min_bin_y, max_bin_y );
 				
   TH2D * d_eff = new TH2D( "d_eff", "Detection efficiency; x (mm); y (mm)",
-			  			    		  			   17, -250.0, 250.0, 17, -250, 250  );	
+			  			    		  			   bin_x,  min_bin_x, max_bin_x,  bin_y,  min_bin_y, max_bin_y  );	
  TH2D * hqscan = new TH2D( "hqscan", "Number of hits on photocathode; x (mm); y (mm)",
-			  		  			    17, -250.0, 250.0, 17, -250, 250  );
+			  		  			    bin_x,  min_bin_x,max_bin_x,  bin_y,  min_bin_y, max_bin_y  );
  TH1D * z_position = new TH1D( "z_position", "Z position; (cm)",
 		   						  			  			    100,-254,0 );
   TH1D * dig_Time = new TH1D( "dig_Time", "time distribution; time(nsec)",
-						  			  			    250,-2,2 );	
-  TH1D * TOF = new TH1D( "TOF", "Time distribution; time-TOF(nsec)",250,-1,10 );
+						  			  			    200,-300,300 );	
+  TH1D * TOF = new TH1D( "TOF", "True_used distribution; true_used",250,-1,5 );
    TH1D * deposit_energy = new TH1D( "deposit_energy", "Energy of the photon at the hit; ",250,3.00,3.15);
   																    	
   TH2D* d_eff_norm;//=new TH2D( "d_eff_norm", "Detection efficiency normalized; x (mm); y (mm)",
@@ -100,9 +118,26 @@ void ptfplot( char * fname = "geant4ptf_100_edge_water.root"){
     // get average x, y position
     double xav = 0.0, yav = 0.0;
     int    nphotons = ptf->NPhotons;
-	TOF->Fill(ptf->true_t[0]-(-0.00337083*ptf->true_z[0]+0.0737));
+	//if(nphotons>1){
+	//cout<<nphotons<<endl;
+	//}
+	//double x=ptf->true_x[0];
+	//double y=ptf->true_y[0];
+	//double z=ptf->true_y[0];
+	//TOF->Fill(ptf->true_t[0]-(-0.00337083*ptf->true_z[0]+0.0737));
+	if (nphotons==1){
+	TOF->Fill(ptf->true_used[0]);
+	hqscan->Fill(ptf->true_x[0],ptf->true_y[0]);
+}
+	dig_Time->Fill(ptf->true_x[0]);
 	reflection->Fill( ptf->true_z[0], ptf->true_t[0]);
+	reflection_d->Fill( sqrt(ptf->true_x[0]*ptf->true_x[0]+ptf->true_y[0]*ptf->true_y[0]), ptf->true_z[0]);
+	//cout<<sqrt(x*x+y*y)<<endl;
+	reflection_v->Fill( ptf->true_x[0], ptf->true_z[0]);
+	reflection_h->Fill( ptf->true_y[0], ptf->true_z[0]);
+	//hqscan->Fill(ptf->true_x[0],ptf->true_y[0]);
 	//dig_Time->Fill(ptf->true_t[0]);
+		
 	bool k=ptf->true_used[0];
 	if (k==0){ //We only want to display the photons that were detected
 	//						//cout<<ptf->true_used[0]<<endl;//ptf->true_t[0]<<endl
@@ -110,14 +145,14 @@ void ptfplot( char * fname = "geant4ptf_100_edge_water.root"){
 		continue;
 		};	
 				
-	if (ptf->true_t[0]>1.0){ //Get rid of the reflection that we had
+	if (ptf->true_t[0]>1){ //Get rid of the reflection that we had
 		        //cout<<time_cut<<endl;//ptf->true_t[0]<<endl
 				//cout<<ptf->true_used[0]<<endl;
 				time_cut++;
 				continue;
 							};
 						
-			
+		
 	//double b=   -0.104075;//-0.0736369;//-0.075 ;//-0.00136308;
     //double slope=-0.00470108;//-0.00337274;//-0.00470108
     //long double  cut=(ptf->true_z[0])*slope;
@@ -162,13 +197,15 @@ void ptfplot( char * fname = "geant4ptf_100_edge_water.root"){
     double xloc = -300.0 + ix * 2.0; //Only a bin that is continued
     double yloc = -300.0 + iy * 2.0;
     //hqscan->SetBinContent( ix+1, iy+1, ptf->dig_Q[0] );
-    reflection->Fill( ptf->true_z[0], ptf->true_t[0]);
+    //reflection->Fill( ptf->true_z[0], ptf->true_t[0]);
+
+	
 	deposit_energy->Fill(ptf->true_e[0]);
 	z_position_list.push_back( ptf->true_z[0]);
 	timing_list.push_back( ptf->true_t[0]);
 	//hqscan->Fill(ptf->true_x[0],ptf->true_y[0]);
 
-	//hq->Fill( ptf->true_x[0], ptf->true_y[0]);
+	hq->Fill( ptf->true_x[0], ptf->true_y[0]);
 	
 	//cout<<ptf->true_t[0]-0.004826*ptf->true_z[0]-0.04826<<endl;
 	
@@ -266,37 +303,52 @@ cout<<timing_max_value<<timing_min_value<<endl;
 cout<<"slope"<<slope<<endl;
 */
 double ratio_de=0;
-bool weight;
+int weight;
 double cut_timing;
+int h=0;
 for (unsigned long long iev =0 ; iev < nevents; ++iev ){
 	   ptf_tree->GetEvent( iev );
 	  //	 t->GetEvent( iev );
 //	 pos->Fill( t->x[0], t->y[0]);
 	// double weight= ( hscanxy->GetBinContent(ix, iy))/2000;
+	   
  	weight=ptf->true_used[0];
 	cut_timing=ptf->true_t[0];
-	if (ptf->true_t[0]>0.5){ //Get rid of the reflection that we had
+	
+	//if (ptf->true_t[0]>1.0){ //Get rid of the reflection that we had
 			//cout<<ptf->true_t[0]<<endl;//ptf->true_t[0]<<endl
 			//cout<<ptf->true_used[0]<<endl;
-		weight=0;
+	//			weight=0;
 		//cut_timing=-1.0;
-		
-										};
-	if (iev%100==0){
-	//pos->Fill(x_pos,y_pos,((double) ratio)/1000);	
+	//		}
+	//		
+	//if(weight>1){
+	//cout<<ptf->true_used[0]<<endl;
+	//}
+							//};
+    //t->GetEvent(h);	.q
+	//reflection_inc->Fill(ptf->true_z[0],sqrt(x_pos*x_pos+y_pos*y_pos));	
+	//reflection_inc->Fill(sqrt(x_pos*x_pos+y_pos*y_pos),z_pos);	
+	//reflection_inc_r->Fill(sqrt(x_pos*x_pos+y_pos*y_pos),sqrt(ptf->true_x[0]*ptf->true_x[0]+ptf->true_y[0]*ptf->true_y[0]));
+			
 	
+	if (iev%100==0 & iev!=0){
 	t->GetEvent(iev/100);
-	if (((double) ratio_de)==100){
+	pos->Fill(x_pos,y_pos,((double) ratio_de)/200);	
+	h++;
+	
+	//if (((double) ratio_de)==100){
 		//ratio_de=0.0;
 			//continue;
-		dig_Time->Fill(cut_timing);
-		hqscan->Fill(ptf->true_x[0],ptf->true_y[0]);
-		cout<<ptf->true_x[0]<<ptf->true_y[0]<<endl;
-		cout<<x_pos<<y_pos<<endl;
-		}
+	//	dig_Time->Fill(cut_timing);
+//		hqscan->Fill(ptf->true_x[0],ptf->true_y[0]);
+	//	cout<<ptf->true_x[0]<<ptf->true_y[0]<<endl;
+	//	cout<<x_pos<<y_pos<<endl;
+	//	}
 	//dig_Time->Fill(cut_timing);
-	pos->Fill(x_pos,y_pos,((double)ratio_de)/200);
-	//cout<<((double) ratio_de)<<"  "<<x_pos<<"  "<<y_pos<<" "<< ptf->true_used[0]<<"  "<<iev/1000<<endl;
+	//TOF->Fill(weight);
+	//cout<<((double) ratio_de)<<"  "<<x_pos<<"  "<<y_pos<<" "<< ptf->true_used[0]<<"  "<<iev<<endl;
+	
 	ratio_de=0.0;
 //	 cout<<x_pos<<" "<<y_pos<<endl;
 	 
@@ -308,21 +360,26 @@ for (unsigned long long iev =0 ; iev < nevents; ++iev ){
 		//									};
 											
 		
+		
+    int    nphotons = ptf->NPhotons;
+ 	if (nphotons==1){
+ 	 ratio_de=weight+ratio_de;
+ }
 	
-	 ratio_de=weight+ratio_de;
 	 //cout<< ratio_de<<" "<<iev<<" "<<ptf->true_used[0]<<endl;
  }
 // for (unsigned long long iev =0 ; iev < 10001; ++iev )
  //pos_rescale = (TH2D*)pos->Clone();
 
- double max_x_data=0.6385;//Input coming from the data !
- double min_x_data=0.1465;
- double max_y_data=0.6185;
- double min_y_data=0.1265;
+ double max_x_data=0.7;//0.6385;//Input coming from the data !
+ double min_x_data=0.1;//0.1465;
+ double max_y_data=0.7;//0.6185;
+ double min_y_data=0.1;//0.1265;
  double x_bin_2;
  double y_bin_2;
- int bin_sim=55;
- TH2D *pos_rescale = new TH2D("pos_rescale","Simulated DE",bin_sim,min_x_data,max_x_data,bin_sim,min_y_data,max_y_data);
+ //int bin_sim=31;
+ 
+ TH2D *pos_rescale = new TH2D("pos_rescale","Simulated DE",bin_x,0.1,0.7,bin_y,0.1,0.7);
  
  for (int i=0;i<=pos->GetNbinsX();i++){
  	x_bin_2=pos->GetXaxis()->GetBinCenter(i);
@@ -334,12 +391,12 @@ for (unsigned long long iev =0 ; iev < nevents; ++iev ){
  			if (y_bin_2<0){
  				//qe_data->GetBinContent(i,j);
  				//cout<<pos->GetBinContent(i,j)<<" "<<y_bin_2<<" "<<endl;
- 				 pos_rescale->Fill(min_x_data+(x_bin_2+300)/1000,min_y_data+(y_bin_2+300)/1000,pos->GetBinContent(i,j));
+ 				 pos_rescale->Fill(min_x_data+(x_bin_2+max_bin_x)/1000,min_y_data+(y_bin_2+max_bin_y)/1000,pos->GetBinContent(i,j));
  		}
  			if (y_bin_2>0){
  				//qe_data->GetBinContent(i,j);
  				//cout<<x_bin_2<<" "<<y_bin_2<<" "<<qe_sim->GetBinContent(i,j)<<endl;
- 				 pos_rescale->Fill(min_x_data+(x_bin_2+300)/1000,(min_y_data+max_y_data)/2+(y_bin_2)/1000,pos->GetBinContent(i,j));
+ 				 pos_rescale->Fill(min_x_data+(x_bin_2+max_bin_x)/1000,(min_y_data+max_y_data)/2+(y_bin_2)/1000,pos->GetBinContent(i,j));
 				
  		}
  	}
@@ -348,7 +405,7 @@ for (unsigned long long iev =0 ; iev < nevents; ++iev ){
  			if (y_bin_2<0){
  				//qe_data->GetBinContent(i,j);
  				//cout<<x_bin_2<<" "<<y_bin_2<<" "<<qe_sim->GetBinContent(i,j)<<endl;
- 				 pos_rescale->Fill((min_x_data+max_x_data)/2+(x_bin_2)/1000,min_y_data+(y_bin_2+300)/1000,pos->GetBinContent(i,j));
+ 				 pos_rescale->Fill((min_x_data+max_x_data)/2+(x_bin_2)/1000,min_y_data+(y_bin_2+max_bin_y)/1000,pos->GetBinContent(i,j));
 				
  			} 
 		
@@ -375,19 +432,19 @@ cout<<"The timing and detection cut are "<< ((double)time_cut)/nevents<<"   "<<(
 
  for(int ix=1; ix<=hqscan->GetNbinsX(); ix++){
 	 for(int iy=1; iy<= hqscan->GetNbinsY(); iy++){
-		   double weight= ( hqscan->GetBinContent(ix, iy))/2000;//Comes from the PMT factor for more statistics
+		   double weight= ( hqscan->GetBinContent(ix, iy))/200;//Comes from the PMT factor for more statistics
 		    d_eff->SetBinContent(ix,iy,weight);
 	  //cout<<weight<<endl;
 	  
 		} 
 	}
  
-	//TH2D* pmt0_qe_corr_grad;
-	//Circle_st circ = find_circle_max_grad( pos_rescale, pmt0_qe_corr_grad, 0.5 );
+	TH2D* pmt0_qe_corr_grad;
+	Circle_st circ = find_circle_max_grad( pos_rescale, pmt0_qe_corr_grad, 0.5 );
 
-  //zero_outside_circle( pos_rescale, circ );
-   //zero_outside_circle( pos, circ );
-  hqscan->SetStats(0);//Made to not display statistic box
+	zero_outside_circle( pos_rescale, circ );
+	//zero_outside_circle( pos, circ );
+  //.hqscan->SetStats(0);//Made to not display statistic box
   TCanvas* c = new TCanvas("canvas");
   string plotname;
   hqscan->SetDirectory( fout );
@@ -405,10 +462,10 @@ cout<<"The timing and detection cut are "<< ((double)time_cut)/nevents<<"   "<<(
   plotname = string("/Users/vincentgousy-leblanc/Desktop/Research/Geant4/Geant4_PTF_2/Geant4_PTF/postprocess/hqscanxy.pdf");
   
   
-  pos->SetStats(0);//Made to not display statistic box
-  pos->SetDirectory( fout );
+  pos_rescale->SetStats(0);//Made to not display statistic box
+  pos_rescale->SetDirectory( fout );
   //pos->SetMinimum(0.2);
-  pos->Draw("colz0");
+  pos_rescale->Draw("colz0");
   gPad->Modified();
   gPad->Update();
   plotname = string("/Users/vincentgousy-leblanc/Desktop/Research/Geant4/Geant4_PTF_2/Geant4_PTF/postprocess/gun_position.pdf");
@@ -423,18 +480,60 @@ cout<<"The timing and detection cut are "<< ((double)time_cut)/nevents<<"   "<<(
   gPad->Update();
   plotname = string("/Users/vincentgousy-leblanc/Desktop/Research/Geant4/Geant4_PTF_2/Geant4_PTF/postprocess/z_position.pdf");
   c->SaveAs(plotname.c_str(),"pdf");
-    reflection->SetStats(0);
+  
+  
+  reflection->SetStats(0);
   reflection->SetDirectory( fout );
   reflection->Draw("colz0");
   gPad->Modified();
   gPad->Update();
   plotname = string("/Users/vincentgousy-leblanc/Desktop/Research/Geant4/Geant4_PTF_2/Geant4_PTF/postprocess/reflection.pdf");
   c->SaveAs(plotname.c_str(),"pdf");
+  
+  reflection_v->SetStats(0);
+  reflection_v->SetDirectory( fout );
+  reflection_v->Draw("colz0");
+  gPad->Modified();
+  gPad->Update();
+  plotname = string("/Users/vincentgousy-leblanc/Desktop/Research/Geant4/Geant4_PTF_2/Geant4_PTF/postprocess/reflection_vertical.pdf");
+  c->SaveAs(plotname.c_str(),"pdf");
 
- 
+  reflection_h->SetStats(0);
+  reflection_h->SetDirectory( fout );
+  reflection_h->Draw("colz0");
+  gPad->Modified();
+  gPad->Update();
+  plotname = string("/Users/vincentgousy-leblanc/Desktop/Research/Geant4/Geant4_PTF_2/Geant4_PTF/postprocess/reflection_horizontal.pdf");
+  c->SaveAs(plotname.c_str(),"pdf");
+  
+  reflection_d->SetStats(0);
+  reflection_d->SetDirectory( fout );
+  reflection_d->Draw("colz0");
+  gPad->Modified();
+  gPad->Update();
+  plotname = string("/Users/vincentgousy-leblanc/Desktop/Research/Geant4/Geant4_PTF_2/Geant4_PTF/postprocess/reflection_distance.pdf");
+  c->SaveAs(plotname.c_str(),"pdf");
+  
+
+   reflection_inc->SetStats(0);
+   reflection_inc->SetDirectory( fout );
+   reflection_inc->Draw("colz0");
+   gPad->Modified();
+   gPad->Update();
+   plotname = string("/Users/vincentgousy-leblanc/Desktop/Research/Geant4/Geant4_PTF_2/Geant4_PTF/postprocess/reflection_incident.pdf");
+   c->SaveAs(plotname.c_str(),"pdf");
+   
+   reflection_inc_r->SetStats(0);
+   reflection_inc_r->SetDirectory( fout );
+   reflection_inc_r->Draw("colz0");
+   gPad->Modified();
+   gPad->Update();
+   plotname = string("/Users/vincentgousy-leblanc/Desktop/Research/Geant4/Geant4_PTF_2/Geant4_PTF/postprocess/reflection_incident_radial.pdf");
+   c->SaveAs(plotname.c_str(),"pdf");
+	 
   d_eff->SetStats(0);//Made to not display statistic box
   d_eff->SetDirectory( fout );
-  d_eff->SetMinimum(0.2);
+  //d_eff->SetMaximum(1.0);
   d_eff->Draw("colz0");
   gPad->Modified();
   gPad->Update();
@@ -466,7 +565,7 @@ cout<<"The timing and detection cut are "<< ((double)time_cut)/nevents<<"   "<<(
   //TOF->SetMinimum(0.0);
   //dig_Time->SetStats(0);//Made to not display statistic box
   TOF->SetDirectory( fout );
-  c->SetLogy();
+  //c->SetLogy();
   //TOF->SetFillColor( kRed);
   //SetFillStyle( 3001);
   TOF->Draw();
